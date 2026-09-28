@@ -79,11 +79,11 @@ export function AddProductPage() {
 
   return (
     <div className="mx-auto max-w-2xl py-10 px-4 sm:px-6">
-      {/* Back button */}
+      {/* Back button - Restored to a proper button style */}
       <button
         type="button"
         onClick={() => navigate(-1)}
-        className="group mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition-colors hover:text-slate-900"
+        className="group mb-6 inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-sm font-medium text-slate-600 shadow-sm transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
       >
         <ArrowLeft
           className="h-4 w-4 transition-transform group-hover:-translate-x-0.5"
@@ -114,7 +114,7 @@ export function AddProductPage() {
       >
         <div className="divide-y divide-slate-100">
           {/* ── Section 1 — Basic info ── */}
-          <div className="p-6 sm:p-8 space-y-6">
+          <div className="p-6 sm:p-8 space-y-5">
             <SectionLabel number={1} title="Basic information" />
 
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -124,7 +124,7 @@ export function AddProductPage() {
                     id="title"
                     type="text"
                     {...register("title")}
-                    className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:text-slate-400"
+                    className="input-field"
                     placeholder="e.g. Essence Mascara Lash Princess"
                   />
                 </Field>
@@ -136,7 +136,7 @@ export function AddProductPage() {
                     id="description"
                     rows={3}
                     {...register("description")}
-                    className="w-full resize-none rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:text-slate-400"
+                    className="input-field resize-none"
                     placeholder="Short description of the product"
                   />
                 </Field>
@@ -147,7 +147,7 @@ export function AddProductPage() {
                   id="category"
                   type="text"
                   {...register("category")}
-                  className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:text-slate-400"
+                  className="input-field"
                   placeholder="beauty"
                 />
               </Field>
@@ -157,7 +157,7 @@ export function AddProductPage() {
                   id="brand"
                   type="text"
                   {...register("brand")}
-                  className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:text-slate-400"
+                  className="input-field"
                   placeholder="Essence"
                 />
               </Field>
@@ -165,7 +165,7 @@ export function AddProductPage() {
           </div>
 
           {/* ── Section 2 — Pricing ── */}
-          <div className="p-6 sm:p-8 space-y-6">
+          <div className="p-6 sm:p-8 space-y-5">
             <SectionLabel number={2} title="Pricing & inventory" />
 
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -180,7 +180,7 @@ export function AddProductPage() {
                     step="0.01"
                     min="0"
                     {...register("price", { valueAsNumber: true })}
-                    className="w-full rounded-lg border border-slate-300 pl-8 pr-3.5 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:text-slate-400"
+                    className="input-field pl-8"
                     placeholder="0.00"
                   />
                 </div>
@@ -193,7 +193,7 @@ export function AddProductPage() {
                   step="1"
                   min="0"
                   {...register("stock", { valueAsNumber: true })}
-                  className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:text-slate-400"
+                  className="input-field"
                   placeholder="0"
                 />
               </Field>
@@ -201,7 +201,7 @@ export function AddProductPage() {
           </div>
 
           {/* ── Section 3 — Image ── */}
-          <div className="p-6 sm:p-8 space-y-6">
+          <div className="p-6 sm:p-8 space-y-5">
             <SectionLabel number={3} title="Product image" />
 
             <div className="space-y-4">
@@ -211,7 +211,7 @@ export function AddProductPage() {
                     id="thumbnail"
                     type="url"
                     {...register("thumbnail", { onChange: () => setPreviewError(false) })}
-                    className="w-full rounded-lg border border-slate-300 pl-3.5 pr-10 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:text-slate-400"
+                    className="input-field pr-10"
                     placeholder="https://example.com/image.jpg"
                   />
                   {thumbnailValue && (
@@ -246,7 +246,7 @@ export function AddProductPage() {
                 </button>
               </div>
 
-              {/* Large, clean Preview Box */}
+              {/* Preview Box */}
               <div className="mt-2 flex h-40 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400">
                 {hasValidPreview ? (
                   <img
@@ -297,7 +297,7 @@ export function AddProductPage() {
 
 function SectionLabel({ number, title }: { number: number; title: string }) {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 mb-2">
       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-50 text-[11px] font-bold text-indigo-600">
         {number}
       </span>
