@@ -78,7 +78,7 @@ export function AddProductPage() {
   const hasValidPreview = !!(thumbnailValue && !previewError);
 
   return (
-    <div className="mx-auto max-w-3xl">
+    <div className="mx-auto max-w-3xl py-6">
       {/* Back button */}
       <button
         type="button"
@@ -250,8 +250,11 @@ export function AddProductPage() {
           <div className="space-y-6 p-6 sm:p-7">
             <SectionLabel number={3} title="Product image" />
 
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-[1fr_auto]">
-              <div>
+            {/* Changed to flex layout to prevent gaps */}
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
+              
+              {/* Left Column: Input & Help Text */}
+              <div className="flex-1 min-w-0">
                 <Field
                   label="Image URL"
                   error={errors.thumbnail?.message}
@@ -310,8 +313,8 @@ export function AddProductPage() {
                 </div>
               </div>
 
-              {/* Preview — matches input height (46px tall, 46px wide) */}
-              <div className="relative flex h-[46px] w-[46px] items-center justify-center self-start overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
+              {/* Right Column: Preview Box (Fixed size & position) */}
+              <div className="flex h-32 w-32 shrink-0 flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400">
                 {hasValidPreview ? (
                   <img
                     src={thumbnailValue}
@@ -320,10 +323,12 @@ export function AddProductPage() {
                     className="h-full w-full object-cover"
                   />
                 ) : (
-                  <ImageIcon
-                    className="h-4 w-4 text-slate-300"
-                    aria-hidden="true"
-                  />
+                  <>
+                    <ImageIcon className="mb-2 h-6 w-6" aria-hidden="true" />
+                    <span className="text-[10px] font-semibold uppercase tracking-wider">
+                      Preview
+                    </span>
+                  </>
                 )}
               </div>
             </div>
