@@ -13,18 +13,23 @@ export function SearchBar({
 }: Props) {
   return (
     <div className="relative w-full">
+      {/* Icon positioned at 16px from the left, width 16px = ends at 32px */}
       <Search
-        className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+        className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
         aria-hidden="true"
       />
+      
+      {/* Input with !pl-12 (48px) to clear the icon */}
       <input
         type="search"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         aria-label="Search products by name"
-        className="input h-14 rounded-xl pl-12 pr-11 text-base shadow-sm placeholder:text-slate-400 focus:ring-4 [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden"
+        className="input h-14 w-full rounded-xl !pl-12 pr-11 text-base shadow-sm placeholder:text-slate-400 focus:ring-4 [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden"
       />
+      
+      {/* Clear Button */}
       {value && (
         <button
           type="button"
