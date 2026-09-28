@@ -11,7 +11,7 @@ import { useToastStore } from "../store/useToastStore";
 import type { AddProductInput, Product } from "../types/product";
 
 const SAMPLE_IMAGE =
-  "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg";
+  "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png";
 
 const schema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
@@ -75,12 +75,11 @@ export function AddProductPage() {
 
   const onSubmit = (data: FormValues) => mutation.mutate(data);
   const isBusy = isSubmitting || mutation.isPending;
-
   const hasValidPreview = !!(thumbnailValue && !previewError);
 
   return (
-    <div className="mx-auto max-w-2xl">
-      {/* ── Back button — pill style ── */}
+    <div className="mx-auto max-w-3xl">
+      {/* Back button */}
       <button
         type="button"
         onClick={() => navigate(-1)}
@@ -93,7 +92,7 @@ export function AddProductPage() {
         Back to products
       </button>
 
-      {/* ── Header ── */}
+      {/* Header */}
       <div className="mb-6 flex items-start gap-3">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-sm shadow-indigo-600/20">
           <Plus className="h-5 w-5" aria-hidden="true" />
@@ -118,43 +117,47 @@ export function AddProductPage() {
           <div className="space-y-6 p-6 sm:p-7">
             <SectionLabel number={1} title="Basic information" />
 
-            <Field
-              label="Product name"
-              error={errors.title?.message}
-              id="title"
-              required
-            >
-              <input
-                id="title"
-                type="text"
-                {...register("title")}
-                aria-invalid={!!errors.title}
-                aria-describedby={errors.title ? "title-error" : undefined}
-                className="input"
-                placeholder="e.g. Essence Mascara Lash Princess"
-              />
-            </Field>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <div className="sm:col-span-2">
+                <Field
+                  label="Product name"
+                  error={errors.title?.message}
+                  id="title"
+                  required
+                >
+                  <input
+                    id="title"
+                    type="text"
+                    {...register("title")}
+                    aria-invalid={!!errors.title}
+                    aria-describedby={errors.title ? "title-error" : undefined}
+                    className="input"
+                    placeholder="e.g. Essence Mascara Lash Princess"
+                  />
+                </Field>
+              </div>
 
-            <Field
-              label="Description"
-              error={errors.description?.message}
-              id="description"
-              required
-            >
-              <textarea
-                id="description"
-                rows={3}
-                {...register("description")}
-                aria-invalid={!!errors.description}
-                aria-describedby={
-                  errors.description ? "description-error" : undefined
-                }
-                className="input resize-none"
-                placeholder="Short description of the product"
-              />
-            </Field>
+              <div className="sm:col-span-2">
+                <Field
+                  label="Description"
+                  error={errors.description?.message}
+                  id="description"
+                  required
+                >
+                  <textarea
+                    id="description"
+                    rows={3}
+                    {...register("description")}
+                    aria-invalid={!!errors.description}
+                    aria-describedby={
+                      errors.description ? "description-error" : undefined
+                    }
+                    className="input resize-none"
+                    placeholder="Short description of the product"
+                  />
+                </Field>
+              </div>
 
-            <div className="grid gap-6 sm:grid-cols-2">
               <Field
                 label="Category"
                 error={errors.category?.message}
@@ -197,7 +200,7 @@ export function AddProductPage() {
           <div className="space-y-6 p-6 sm:p-7">
             <SectionLabel number={2} title="Pricing & inventory" />
 
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <Field
                 label="Price (USD)"
                 error={errors.price?.message}
@@ -247,7 +250,7 @@ export function AddProductPage() {
           <div className="space-y-6 p-6 sm:p-7">
             <SectionLabel number={3} title="Product image" />
 
-            <div className="grid gap-5 sm:grid-cols-[1fr_140px]">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-[1fr_auto]">
               <div>
                 <Field
                   label="Image URL"
@@ -273,9 +276,7 @@ export function AddProductPage() {
                       <button
                         type="button"
                         onClick={() => {
-                          setValue("thumbnail", "", {
-                            shouldValidate: true,
-                          });
+                          setValue("thumbnail", "", { shouldValidate: true });
                           setPreviewError(false);
                         }}
                         aria-label="Clear image URL"
@@ -309,58 +310,27 @@ export function AddProductPage() {
                 </div>
               </div>
 
-              {/* ── Preview card ── */}
-              <div className="relative">
-                <div
-                  className={
-                    "flex aspect-square w-full items-center justify-center overflow-hidden rounded-xl border transition-colors " +
-                    (hasValidPreview
-                      ? "border-slate-200 bg-slate-50"
-                      : "border-dashed border-slate-300 bg-slate-50/50")
-                  }
-                >
-                  {hasValidPreview ? (
-                    <img
-                      src={thumbnailValue}
-                      alt="Product preview"
-                      onError={() => setPreviewError(true)}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <div className="flex flex-col items-center gap-1.5 text-slate-400">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm">
-                        <ImageIcon className="h-4 w-4" aria-hidden="true" />
-                      </div>
-                      <span className="text-[10px] font-semibold uppercase tracking-wider">
-                        Preview
-                      </span>
-                    </div>
-                  )}
-                </div>
-                {hasValidPreview && (
-                  <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-white shadow-sm ring-2 ring-white">
-                    <svg
-                      viewBox="0 0 12 12"
-                      fill="none"
-                      className="h-2.5 w-2.5"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M2 6l3 3 5-6"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
+              {/* Preview — matches input height (46px tall, 46px wide) */}
+              <div className="relative flex h-[46px] w-[46px] items-center justify-center self-start overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
+                {hasValidPreview ? (
+                  <img
+                    src={thumbnailValue}
+                    alt="Product preview"
+                    onError={() => setPreviewError(true)}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <ImageIcon
+                    className="h-4 w-4 text-slate-300"
+                    aria-hidden="true"
+                  />
                 )}
               </div>
             </div>
           </div>
         </div>
 
-        {/* ── Footer actions ── */}
+        {/* Footer */}
         <div className="flex flex-col-reverse items-stretch gap-3 rounded-b-2xl border-t border-slate-100 bg-slate-50/60 px-6 py-4 sm:flex-row sm:items-center sm:justify-end sm:px-7">
           <button
             type="button"
@@ -384,8 +354,6 @@ export function AddProductPage() {
     </div>
   );
 }
-
-/* ────────── Helpers ────────── */
 
 function SectionLabel({ number, title }: { number: number; title: string }) {
   return (
