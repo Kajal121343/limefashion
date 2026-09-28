@@ -78,30 +78,30 @@ export function AddProductPage() {
   const hasValidPreview = !!(thumbnailValue && !previewError);
 
   return (
-    <div className="mx-auto max-w-3xl py-6">
+    <div className="mx-auto max-w-2xl py-10 px-4 sm:px-6">
       {/* Back button */}
       <button
         type="button"
         onClick={() => navigate(-1)}
-        className="group mb-6 inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-sm font-medium text-slate-600 shadow-sm transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+        className="group mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition-colors hover:text-slate-900"
       >
         <ArrowLeft
-          className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5"
+          className="h-4 w-4 transition-transform group-hover:-translate-x-0.5"
           aria-hidden="true"
         />
         Back to products
       </button>
 
       {/* Header */}
-      <div className="mb-6 flex items-start gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-sm shadow-indigo-600/20">
-          <Plus className="h-5 w-5" aria-hidden="true" />
+      <div className="mb-8 flex items-start gap-4">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-sm shadow-indigo-600/20">
+          <Plus className="h-6 w-6" aria-hidden="true" />
         </div>
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900">
             Add new product
           </h1>
-          <p className="mt-0.5 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-slate-500">
             Fill in the details below to add a product to your catalogue.
           </p>
         </div>
@@ -110,86 +110,54 @@ export function AddProductPage() {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className="rounded-2xl border border-slate-200 bg-white shadow-sm"
+        className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
       >
         <div className="divide-y divide-slate-100">
           {/* ── Section 1 — Basic info ── */}
-          <div className="space-y-6 p-6 sm:p-7">
+          <div className="p-6 sm:p-8 space-y-6">
             <SectionLabel number={1} title="Basic information" />
 
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="sm:col-span-2">
-                <Field
-                  label="Product name"
-                  error={errors.title?.message}
-                  id="title"
-                  required
-                >
+                <Field label="Product name" error={errors.title?.message} id="title" required>
                   <input
                     id="title"
                     type="text"
                     {...register("title")}
-                    aria-invalid={!!errors.title}
-                    aria-describedby={errors.title ? "title-error" : undefined}
-                    className="input"
+                    className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:text-slate-400"
                     placeholder="e.g. Essence Mascara Lash Princess"
                   />
                 </Field>
               </div>
 
               <div className="sm:col-span-2">
-                <Field
-                  label="Description"
-                  error={errors.description?.message}
-                  id="description"
-                  required
-                >
+                <Field label="Description" error={errors.description?.message} id="description" required>
                   <textarea
                     id="description"
                     rows={3}
                     {...register("description")}
-                    aria-invalid={!!errors.description}
-                    aria-describedby={
-                      errors.description ? "description-error" : undefined
-                    }
-                    className="input resize-none"
+                    className="w-full resize-none rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:text-slate-400"
                     placeholder="Short description of the product"
                   />
                 </Field>
               </div>
 
-              <Field
-                label="Category"
-                error={errors.category?.message}
-                id="category"
-                required
-              >
+              <Field label="Category" error={errors.category?.message} id="category" required>
                 <input
                   id="category"
                   type="text"
                   {...register("category")}
-                  aria-invalid={!!errors.category}
-                  aria-describedby={
-                    errors.category ? "category-error" : undefined
-                  }
-                  className="input"
+                  className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:text-slate-400"
                   placeholder="beauty"
                 />
               </Field>
 
-              <Field
-                label="Brand"
-                error={errors.brand?.message}
-                id="brand"
-                required
-              >
+              <Field label="Brand" error={errors.brand?.message} id="brand" required>
                 <input
                   id="brand"
                   type="text"
                   {...register("brand")}
-                  aria-invalid={!!errors.brand}
-                  aria-describedby={errors.brand ? "brand-error" : undefined}
-                  className="input"
+                  className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:text-slate-400"
                   placeholder="Essence"
                 />
               </Field>
@@ -197,16 +165,11 @@ export function AddProductPage() {
           </div>
 
           {/* ── Section 2 — Pricing ── */}
-          <div className="space-y-6 p-6 sm:p-7">
+          <div className="p-6 sm:p-8 space-y-6">
             <SectionLabel number={2} title="Pricing & inventory" />
 
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <Field
-                label="Price (USD)"
-                error={errors.price?.message}
-                id="price"
-                required
-              >
+              <Field label="Price (USD)" error={errors.price?.message} id="price" required>
                 <div className="relative">
                   <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-400">
                     $
@@ -217,29 +180,20 @@ export function AddProductPage() {
                     step="0.01"
                     min="0"
                     {...register("price", { valueAsNumber: true })}
-                    aria-invalid={!!errors.price}
-                    aria-describedby={errors.price ? "price-error" : undefined}
-                    className="input pl-7"
+                    className="w-full rounded-lg border border-slate-300 pl-8 pr-3.5 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:text-slate-400"
                     placeholder="0.00"
                   />
                 </div>
               </Field>
 
-              <Field
-                label="Stock quantity"
-                error={errors.stock?.message}
-                id="stock"
-                required
-              >
+              <Field label="Stock quantity" error={errors.stock?.message} id="stock" required>
                 <input
                   id="stock"
                   type="number"
                   step="1"
                   min="0"
                   {...register("stock", { valueAsNumber: true })}
-                  aria-invalid={!!errors.stock}
-                  aria-describedby={errors.stock ? "stock-error" : undefined}
-                  className="input"
+                  className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:text-slate-400"
                   placeholder="0"
                 />
               </Field>
@@ -247,88 +201,67 @@ export function AddProductPage() {
           </div>
 
           {/* ── Section 3 — Image ── */}
-          <div className="space-y-6 p-6 sm:p-7">
+          <div className="p-6 sm:p-8 space-y-6">
             <SectionLabel number={3} title="Product image" />
 
-            {/* Changed to flex layout to prevent gaps */}
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
-              
-              {/* Left Column: Input & Help Text */}
-              <div className="flex-1 min-w-0">
-                <Field
-                  label="Image URL"
-                  error={errors.thumbnail?.message}
-                  id="thumbnail"
-                  required
-                >
-                  <div className="relative">
-                    <input
-                      id="thumbnail"
-                      type="url"
-                      {...register("thumbnail", {
-                        onChange: () => setPreviewError(false),
-                      })}
-                      aria-invalid={!!errors.thumbnail}
-                      aria-describedby={
-                        errors.thumbnail ? "thumbnail-error" : "thumbnail-help"
-                      }
-                      className="input pr-9"
-                      placeholder="https://example.com/image.jpg"
-                    />
-                    {thumbnailValue && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setValue("thumbnail", "", { shouldValidate: true });
-                          setPreviewError(false);
-                        }}
-                        aria-label="Clear image URL"
-                        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
-                      >
-                        <X className="h-3.5 w-3.5" aria-hidden="true" />
-                      </button>
-                    )}
-                  </div>
-                </Field>
-
-                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <p id="thumbnail-help" className="text-xs text-slate-500">
-                    Right-click any image online →{" "}
-                    <span className="font-medium text-slate-600">
-                      Copy image address
-                    </span>
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setValue("thumbnail", SAMPLE_IMAGE, {
-                        shouldValidate: true,
-                      });
-                      setPreviewError(false);
-                    }}
-                    className="rounded text-xs font-semibold text-indigo-600 hover:text-indigo-700 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
-                  >
-                    Use sample image
-                  </button>
+            <div className="space-y-4">
+              <Field label="Image URL" error={errors.thumbnail?.message} id="thumbnail" required>
+                <div className="relative">
+                  <input
+                    id="thumbnail"
+                    type="url"
+                    {...register("thumbnail", { onChange: () => setPreviewError(false) })}
+                    className="w-full rounded-lg border border-slate-300 pl-3.5 pr-10 py-2.5 text-sm text-slate-900 outline-none transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder:text-slate-400"
+                    placeholder="https://example.com/image.jpg"
+                  />
+                  {thumbnailValue && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setValue("thumbnail", "", { shouldValidate: true });
+                        setPreviewError(false);
+                      }}
+                      aria-label="Clear image URL"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700"
+                    >
+                      <X className="h-3.5 w-3.5" aria-hidden="true" />
+                    </button>
+                  )}
                 </div>
+              </Field>
+
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                <p className="text-xs text-slate-500">
+                  Right-click any image online → <span className="font-medium text-slate-600">Copy image address</span>
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setValue("thumbnail", SAMPLE_IMAGE, { shouldValidate: true });
+                    setPreviewError(false);
+                  }}
+                  className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 hover:underline"
+                >
+                  Use sample image
+                </button>
               </div>
 
-              {/* Right Column: Preview Box (Fixed size & position) */}
-              <div className="flex h-32 w-32 shrink-0 flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400">
+              {/* Large, clean Preview Box */}
+              <div className="mt-2 flex h-40 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400">
                 {hasValidPreview ? (
                   <img
                     src={thumbnailValue}
                     alt="Product preview"
                     onError={() => setPreviewError(true)}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain p-2"
                   />
                 ) : (
-                  <>
-                    <ImageIcon className="mb-2 h-6 w-6" aria-hidden="true" />
-                    <span className="text-[10px] font-semibold uppercase tracking-wider">
-                      Preview
+                  <div className="flex flex-col items-center gap-2">
+                    <ImageIcon className="h-8 w-8 text-slate-300" aria-hidden="true" />
+                    <span className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                      Image Preview
                     </span>
-                  </>
+                  </div>
                 )}
               </div>
             </div>
@@ -336,7 +269,7 @@ export function AddProductPage() {
         </div>
 
         {/* Footer */}
-        <div className="flex flex-col-reverse items-stretch gap-3 rounded-b-2xl border-t border-slate-100 bg-slate-50/60 px-6 py-4 sm:flex-row sm:items-center sm:justify-end sm:px-7">
+        <div className="flex flex-col-reverse items-stretch gap-3 border-t border-slate-100 bg-slate-50/50 px-6 py-5 sm:flex-row sm:items-center sm:justify-end sm:px-8">
           <button
             type="button"
             onClick={() => {
@@ -344,14 +277,16 @@ export function AddProductPage() {
               setPreviewError(false);
             }}
             disabled={isBusy}
-            className="btn-secondary"
+            className="rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50 disabled:opacity-50"
           >
             Cancel
           </button>
-          <button type="submit" disabled={isBusy} className="btn-primary">
-            {isBusy && (
-              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
-            )}
+          <button
+            type="submit"
+            disabled={isBusy}
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-indigo-700 disabled:opacity-50"
+          >
+            {isBusy && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}
             {isBusy ? "Adding…" : "Add product"}
           </button>
         </div>
@@ -362,7 +297,7 @@ export function AddProductPage() {
 
 function SectionLabel({ number, title }: { number: number; title: string }) {
   return (
-    <div className="flex items-center gap-2.5">
+    <div className="flex items-center gap-3">
       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-50 text-[11px] font-bold text-indigo-600">
         {number}
       </span>
