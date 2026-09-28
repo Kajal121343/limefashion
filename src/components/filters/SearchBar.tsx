@@ -23,7 +23,7 @@ export function SearchBar({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         aria-label="Search products by name"
-        className="input pl-10 pr-11 [&::-webkit-search-cancel-button]:hidden"
+        className="input h-14 rounded-xl pl-12 pr-11 text-base shadow-sm placeholder:text-slate-400 focus:ring-4 [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden"
       />
       {value && (
         <button
