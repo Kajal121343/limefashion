@@ -1,85 +1,95 @@
-# Limefashion — Product Management Dashboard
+Limefashion — Product Management Dashboard
+A responsive product management dashboard built with React, TypeScript, Vite, and Tailwind CSS. It uses the DummyJSON Products API to browse, search, filter, sort, view, favourite, and add products.
 
-A responsive product management dashboard built with **React, TypeScript, Vite, and Tailwind CSS**. It uses the DummyJSON Products API to browse, search, filter, sort, view, favourite, and add products.
+Live Demo: https://limefashion.vercel.app/products
 
-**Live Demo:** [Add your Vercel URL]
+Features
+Product listing with search, filter, and sorting
 
-## Features
+Product details page
 
-* Product listing with search, filter, and sorting
-* Product details page
-* Add new products with form validation
-* Favourite products with localStorage persistence
-* Pagination
-* Loading, error, and empty states
-* Responsive design (360px to desktop)
-* Accessible UI
-* URL-synchronised filters
+Add new products with form validation
 
-## Tech Stack
+Favourite products with localStorage persistence
 
-* React + Vite + TypeScript
-* React Router
-* Tailwind CSS
-* Zustand
-* TanStack Query
-* React Hook Form + Zod
-* Lucide React
+Pagination
 
-## State Management
+Loading, error, and empty states
 
-**Zustand** was chosen over Context API or Redux Toolkit because:
+Responsive design (360px to desktop)
 
-* Filters, search, sorting, and pagination are shared across multiple components. Zustand provides selector-based subscriptions.
-* Redux Toolkit would add more boilerplate than needed for this project.
-* Zustand's `persist` middleware makes it simple to save favourites in localStorage.
+Accessible UI
 
-**Global state:** filters, search, sorting, pagination, favourite IDs, toast queue, and locally added products.
+URL-synchronised filters
 
-**Local state:** form fields, image preview errors, and toast timers.
+Tech Stack
+React + Vite + TypeScript
 
-## API
+React Router
 
-Uses the [DummyJSON Products API](https://dummyjson.com/products).
+Tailwind CSS
 
-* `GET /products?limit=100` — Get products
-* `GET /products/:id` — Get product details
-* `POST /products/add` — Add product
-* `GET /products/category-list` — Get categories
+Zustand
 
-> DummyJSON does not permanently save POST requests, so newly added products are stored locally in Zustand state. This is allowed by the assignment.
+TanStack Query
 
-> Filtering, sorting, and pagination are handled client-side after fetching the products.
+React Hook Form + Zod
 
-## Performance Optimisations
+Lucide React
 
-1. **Route-based code splitting** — Main pages are lazy-loaded using `React.lazy` and `Suspense` to reduce the initial bundle.
-2. **Debounced search** — Search is delayed by 300ms to avoid filtering on every keystroke.
-3. **Memoisation** — `useMemo` prevents unnecessary recalculation of filtered, sorted, and paginated products.
-4. **Optimised images** — Images use lazy loading, async decoding, and fixed dimensions to reduce layout shift.
-5. **Zustand selectors** — Components subscribe only to the state they need to reduce unnecessary re-renders.
+State Management
+Zustand was chosen over Context API or Redux Toolkit because:
 
-## Getting Started
+Filters, search, sorting, and pagination are shared across multiple components. Zustand provides selector-based subscriptions.
 
-```bash
+Redux Toolkit would add more boilerplate than needed for this project.
+
+Zustand's persist middleware makes it simple to save favourites in localStorage.
+
+Global state: filters, search, sorting, pagination, favourite IDs, toast queue, and locally added products.
+
+Local state: form fields, image preview errors, and toast timers.
+
+API
+Uses the DummyJSON Products API.
+
+GET /products?limit=100 — Get products
+
+GET /products/:id — Get product details
+
+POST /products/add — Add product
+
+GET /products/category-list — Get categories
+
+DummyJSON does not permanently save POST requests, so newly added products are stored locally in Zustand state.
+
+Filtering, sorting, and pagination are handled client-side after fetching the products.
+
+Performance Optimisations
+Route-based code splitting — Main pages are lazy-loaded using React.lazy and Suspense.
+
+Debounced search — Search is delayed by 300ms to avoid filtering on every keystroke.
+
+Memoisation — useMemo prevents unnecessary recalculation of filtered, sorted, and paginated products.
+
+Optimised images — Images use lazy loading, async decoding, and fixed dimensions.
+
+Zustand selectors — Components subscribe only to the state they need.
+
+Getting Started
+bash
 git clone https://github.com/YOUR_USERNAME/limefashion.git
 cd limefashion
 npm install
 npm run dev
-```
+Open http://localhost:5173
 
-Open `http://localhost:5173`
-
-### Production Build
-
-```bash
+Production Build
+bash
 npm run build
 npm run preview
-```
-
-## Project Structure
-
-```text
+Project Structure
+text
 src/
 ├── components/    # UI components
 ├── hooks/         # Custom hooks
@@ -89,13 +99,10 @@ src/
 ├── store/         # Zustand stores
 ├── types/         # TypeScript types
 └── utils/         # Utility functions
-```
+Known Limitations
+Newly added products are stored locally and reset after a hard refresh.
 
-The project keeps UI components, business logic, API calls, state, and types separated for easier maintenance.
+Client-side filtering is suitable for the current catalogue size.
 
-## Known Limitations
-
-* Newly added products are stored locally and reset after a hard refresh.
-* Client-side filtering is suitable for the current catalogue size.
-* Authentication is not included because it was not required.
+Authentication is not included because it was not required.
 
